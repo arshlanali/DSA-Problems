@@ -18,7 +18,9 @@ class Solution {
         // Code here
         int vis[V]={0};
         vector<int> res;
-        dfs(adj, res, 0, vis);
+        for(int i=0;i<V;i++){
+            if(!vis[i]) dfs(adj, res, 0, vis);
+        }
         return res;
     }
 };
