@@ -1,0 +1,1 @@
+<h2>battleships-in-a-board Notes</h2><hr>space optimized
