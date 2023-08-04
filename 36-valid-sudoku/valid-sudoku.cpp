@@ -9,19 +9,12 @@ public:
                     return false;
                 }
                 if(board[i][j]!='.') hash[board[i][j]]++;
-            }
-        }
-        for(int i=0;i<9;i++){
-            unordered_map<char,int> hash, kash;
-            for(int j=0;j<9;j++){
-                if(hash.find(board[j][i])!=hash.end()){
+                if(kash.find(board[j][i])!=kash.end()){
                     cout<<i<<" "<<j;
                     return false;
                 }
-                if(board[j][i]!='.') hash[board[j][i]]++;
-                // cout<< i<<" "<<j<<" ";
+                if(board[j][i]!='.') kash[board[j][i]]++;
             }
-            // cout<<endl;
         }
         int delrow[]={1, 2, 3};
         int delcol[]= {1, 2, 3};
