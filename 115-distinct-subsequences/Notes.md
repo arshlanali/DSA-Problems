@@ -1,1 +1,1 @@
-<h2>distinct-subsequences Notes</h2><hr>O(n) space optimized instead of O(2n)
+<h2>distinct-subsequences Notes</h2><hr>clean final code
