@@ -7,7 +7,7 @@ public:
         if(s[i]==t[j]) return dp[i][j]= solve(i-1, j-1, s, t, dp)+ solve(i-1, j, s, t, dp);
         else return dp[i][j]= solve(i-1, j, s, t, dp);
     }
-    long long numDistinct(string s, string t) {
+    int numDistinct(string s, string t) {
         int n= s.size(), m= t.size();
         vector<vector<double>> dp(n+1, vector<double>(m+1,0));
         // return solve(n-1, m-1, s, t, dp);
@@ -19,6 +19,6 @@ public:
                 else dp[i][j]= dp[i-1][j];
             }
         }
-        return (long long)dp[n][m];
+        return (int)dp[n][m];
     }
 };
