@@ -6,7 +6,7 @@ public:
             int mid= (l+h)/2;
             if(nums[mid]==target) return mid;
             if(nums[mid]>=nums[l]){ // left part sorted
-                if(target>=nums[l]  && target<=nums[mid]){// element must be present in left
+                if(target>=nums[l]  && target<nums[mid]){// element must be present in left
                     h=mid-1;
                 }
                 else{// target present in right unsorted part
@@ -14,7 +14,7 @@ public:
                 }
             }
             else{// right part  of mid is sorted
-             if(target>= nums[mid] && target<= nums[h]){ // present in the right sorted par
+             if(target> nums[mid] && target<= nums[h]){ // present in the right sorted par
                  l=mid+1;
              }
                 else{
