@@ -13,7 +13,18 @@ int n;
     }
     int minScoreTriangulation(vector<int>& values) {
         n= values.size();
-        vector<vector<int>> dp(n, vector<int>(n,-1));
-        return solve(1, n-1, values, dp);
+        vector<vector<int>> dp(n, vector<int>(n,0));
+        for(int i=1;i<n;i++) dp[i][i]=0;
+        for(int i=n-1;i>=1;i--){
+            for(int j=i+1;j<n;j++){
+                int mini= INT_MAX;
+                for(int k=i;k<=j-1;k++){
+                    int ans= solve(i, k, values, dp) + values[i-1]*values[k]*values[j] + solve(k+1, j, values, dp);
+                    mini=min(ans, mini);
+                }
+                dp[i][j]=mini;
+            }
+        }
+        return dp[1][n-1];
     }
 };
