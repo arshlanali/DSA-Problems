@@ -2,22 +2,19 @@ class Solution {
 public:
     int change(int target, vector<int>& coins) {
         int n= coins.size();
-        vector<vector<int>> dp(n, vector<int>(target+1, 0));
-        for(int t=0;t<=target;t++){
-            if(t%coins[0]==0) dp[0][t]=1;
-            else dp[0][t]=0;
-        }
-        for(int ind=0;ind<n;ind++) dp[ind][0]=1;
+        vector<int> prev(target+1, 0), curr(target+1, 0);
+        for(int t=0;t<=target;t++) prev[t]= t%coins[0]==0;
         for(int ind=1;ind<n;ind++){
-            for(int t=1;t<=target;t++){
-                int skip= dp[ind-1][t];
+            for(int t=0;t<=target;t++){
+                int skip= prev[t];
                 int take=0;
                 if(coins[ind]<=t){
-                    take= dp[ind][t-coins[ind]];
+                    take= curr[t-coins[ind]];
                 }
-                dp[ind][t]= skip+take;
+                curr[t]= skip+take;
             }
+            prev=curr;
         }
-        return dp[n-1][target];
+        return prev[target];
     }
 };
