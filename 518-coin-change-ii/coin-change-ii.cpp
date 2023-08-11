@@ -1,22 +1,23 @@
 class Solution {
 public:
-    int solve(int ind, int target, vector<int> coins, vector<vector<int>>& dp){
-        if(target==0) return 1;
-        if(ind==0){
-            if(target%coins[ind]==0) return 1;
-            else return 0;
+    int change(int target, vector<int>& coins) {
+        int n= coins.size();
+        vector<vector<int>> dp(n, vector<int>(target+1, 0));
+        for(int t=0;t<=target;t++){
+            if(t%coins[0]==0) dp[0][t]=1;
+            else dp[0][t]=0;
         }
-        if(dp[ind][target]!=-1) return dp[ind][target];
-        int skip= solve(ind-1, target, coins, dp);
-        int take=0;
-        if(coins[ind]<=target){
-            take= solve(ind, target-coins[ind], coins, dp);
+        for(int ind=0;ind<n;ind++) dp[ind][0]=1;
+        for(int ind=1;ind<n;ind++){
+            for(int t=1;t<=target;t++){
+                int skip= dp[ind-1][t];
+                int take=0;
+                if(coins[ind]<=t){
+                    take= dp[ind][t-coins[ind]];
+                }
+                dp[ind][t]= skip+take;
+            }
         }
-        return dp[ind][target]=skip+take;
-    }
-    int change(int amt, vector<int>& coins) {
-        int n=coins.size();
-        vector<vector<int>> dp(n,vector<int>(amt+1, -1));
-        return solve(n-1, amt, coins , dp);
+        return dp[n-1][target];
     }
 };
