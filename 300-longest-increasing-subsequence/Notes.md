@@ -1,1 +1,1 @@
-<h2>longest-increasing-subsequence Notes</h2><hr>memoization
+<h2>longest-increasing-subsequence Notes</h2><hr>most optimized solution
