@@ -24,7 +24,6 @@ public:
             int col= q.front().first.second;
             int time= q.front().second;
             q.pop();
-            grid[row][col]=2;
             maxtime= max(maxtime, time);
             for(int i=0;i<4; i++){
                 int nrow= row + delrow[i];
