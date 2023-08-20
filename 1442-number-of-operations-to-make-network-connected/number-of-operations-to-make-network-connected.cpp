@@ -1,6 +1,6 @@
-class disjointset{
-    vector<int> rank, parent, size;
+class disjointset{  
 public:
+    vector<int> rank, parent, size;
     disjointset(int n){
         rank.resize(n+1, 0);
         parent.resize(n+1,0);
@@ -36,7 +36,7 @@ public:
             parent[pv]=  pu;
             size[pu]+= size[pv];
         }
-        else if(rank[pv]>=rank[pu]){// we can also use the else statement here
+        else if(rank[pv]>=rank[pu]){
             parent[pu]= pv;
             size[pv]+= size[pu];
         }
@@ -55,7 +55,7 @@ public:
         }
         int ncomp=0;
         for(int i=0; i<n;i++){
-            if(ds.findpar(i)==i) ncomp++;
+            if(ds.parent[i]==i) ncomp++;
         }
         if(extra<ncomp-1) return -1;
         return ncomp-1;
