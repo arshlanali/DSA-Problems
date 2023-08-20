@@ -36,8 +36,8 @@ public:
         vector<int> grptopo= toposort(adjgrp, grpindegree);
 
         if(itemtopo.size()==0 || grptopo.size()==0) return {};
+        
         vector<int> grptoitem[m];
-
         for(int i=0; i<itemtopo.size(); i++){
             int group= grp[itemtopo[i]];
             grptoitem[group].push_back(itemtopo[i]);
