@@ -38,7 +38,11 @@ public:
         if(itemtopo.size()==0 || grptopo.size()==0) return {};
         vector<int> grptoitem[m];
 
-        for(int i=0; i<itemtopo.size(); i++) grptoitem[grp[itemtopo[i]]].push_back(itemtopo[i]);
+        for(int i=0; i<itemtopo.size(); i++){
+            int group= grp[itemtopo[i]];
+            grptoitem[group].push_back(itemtopo[i]);
+        }
+         
         vector<int> res;
         for(int i=0; i<grptopo.size(); i++){
             int group= grptopo[i];
