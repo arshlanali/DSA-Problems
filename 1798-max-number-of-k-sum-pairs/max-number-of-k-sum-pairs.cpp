@@ -6,8 +6,7 @@ public:
         for(auto it:nums){
             if(hash[k-it]){
                 pairs++;
-                if(hash[k-it]==1) hash.erase(k-it);
-                else hash[k-it]--;
+                hash[k-it]--;
             }
             else hash[it]++;
         }
