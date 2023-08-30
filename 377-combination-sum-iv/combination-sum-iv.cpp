@@ -1,17 +1,15 @@
 class Solution {
 public:
-int n;
-    int solve(int ind, int target, vector<int> nums, vector<int>& dp){
-        if(ind<0 || target<=0) return target==0;
-        if(dp[target]!=-1) return dp[target];
-        int skip= solve(ind-1, target, nums, dp);
-        int take=0;
-        if(nums[ind]<=target) take= solve(n-1, target-nums[ind], nums, dp);
-        return dp[target]= skip+take;
-    }
-    int combinationSum4(vector<int>& nums, int target) {
+int n;  
+    int combinationSum4(vector<int>& nums, int K) {
         n= nums.size();
-        vector<int> dp(target+1, -1);
-        return solve(n-1, target, nums, dp);
+        vector<double> dp(K+1, 0);
+        dp[0]=1;
+        for(int target=1; target<=K; target++){
+            for(int ind=0; ind<n; ind++){
+                if(nums[ind]<=target) dp[target]+= dp[target-nums[ind]];
+            }
+        }
+        return dp[K];
     }
 };
