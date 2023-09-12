@@ -5,29 +5,29 @@ public:
         if(row<0 || row>=n || col<0 || col>=m) return false;
         return true;
     }
-    bool dfs(int ind, int row, int col, vector<vector<char>>& board, string word){
+    bool dfs(int ind, int row, int col, vector<vector<char>>& board, string word, vector<vector<int>>& vis){
         if(ind==sz) return true;
-        if(!isValid(row, col) || word[ind]!=board[row][col]) return false;
-        char ori= board[row][col];
-        board[row][col]=' ';
+        vis[row][col]=1;
         int delrow[]= {-1, 0, 1, 0};
         int delcol[]= {0, 1, 0, -1};
-        bool found= false;
-        for(int i=0;i<4;i++){
-            int nrow= row+delrow[i];
+        for(int i=0;i<4; i++){
+            int nrow= row+ delrow[i];
             int ncol= col+ delcol[i];
-            found|= dfs(ind+1, nrow, ncol, board, word);
+            if(isValid(nrow, ncol) && word[ind]== board[nrow][ncol] && !vis[nrow][ncol]){
+                if(dfs(ind+1, nrow, ncol, board, word, vis)) return true;
+            }
         }
-        board[row][col]=ori;
-        return found;
+        vis[row][col]=0;
+        return false;
     }
     bool exist(vector<vector<char>>& board, string word) {
         sz= word.size();
         n= board.size(), m= board[0].size();
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
+                vector<vector<int>> vis(n, vector<int>(m));
                 if(board[i][j]== word[0]){
-                    if(dfs(0, i, j, board, word)) return true;
+                    if(dfs(1, i, j, board, word, vis)) return true;
                 }
             }
         }
