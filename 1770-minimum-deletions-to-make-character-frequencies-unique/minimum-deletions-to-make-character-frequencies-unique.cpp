@@ -1,16 +1,15 @@
 class Solution {
 public:
     int minDeletions(string s) {
-        unordered_map<char,int> fc;
-        for(auto c: s) fc[c]++;
-        unordered_set<int> st;
+        vector<int> freq(26);
+        for(auto c:s) freq[c-'a']++;
+        sort(begin(freq), end(freq));
         int del=0;
-        for(auto it: fc){
-            while(st.find(it.second)!= st.end() && it.second!=0){
-                del++;
-                it.second--;
+        for(int i=24;i>=0 && freq[i]>0;i--){
+            if(freq[i]>=freq[i+1]){
+                del+= freq[i]- max(0,freq[i+1]-1);
+                freq[i]= max(0,freq[i+1]-1);
             }
-            if(it.second!=0) st.insert(it.second);
         }
         return del;
     }
