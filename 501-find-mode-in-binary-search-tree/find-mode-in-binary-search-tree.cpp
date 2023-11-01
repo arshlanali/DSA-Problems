@@ -11,25 +11,26 @@
  */
 class Solution {
 public:
+int last=INT_MIN, cnt=0, maxi=INT_MIN;
+    void helper(TreeNode* root, vector<int>& res){
+        if(!root) return ;
+        helper(root->left, res);
+        if(last== root->val) cnt++;
+        else cnt=1;
+        if(cnt>maxi){
+            maxi= cnt;
+            res.clear();
+            res.push_back(root->val);
+        }
+        else if(cnt==maxi) res.push_back(root->val);
+        last=root->val;
+        helper(root->right, res);
+
+
+    }
     vector<int> findMode(TreeNode* root) {
-        unordered_map<int,int> hash;
-        queue<TreeNode*> q;
-        q.push(root);
-        while(q.size()){
-            TreeNode* node= q.front();
-            q.pop();
-            hash[node->val]++;
-            if(node->left) q.push(node->left);
-            if(node->right) q.push(node->right);
-        }
-        int maxi=0;
-        for(auto it: hash){
-            maxi= max(maxi, it.second);
-        }
         vector<int> res;
-        for(auto it:hash){
-            if(it.second==maxi) res.push_back(it.first);
-        }
+        helper(root, res);
         return res;
     }
 };
