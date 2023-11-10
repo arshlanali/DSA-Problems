@@ -18,7 +18,10 @@ public:
         }
         int start=-1;
         for(auto it: adj){
-            if(it.second.size()==1) start=it.first;
+            if(it.second.size()==1){
+                 start=it.first;
+                 break;
+            }
         }
         dfs(start, -1, adj);
         return res;
