@@ -1,8 +1,18 @@
 class Solution {
 public:
     int maxProduct(vector<int>& nums) {
-        sort(nums.begin(), nums.end());
         int n= nums.size();
-        return (nums[n-1]-1)*(nums[n-2]-1);
+        int maxi=0, smax=0;
+        for(int i=0;i<n;i++){
+            if(nums[i]>maxi){
+                smax= maxi;
+                maxi=nums[i];
+            }
+            else if(nums[i]>smax && nums[i]<= maxi){
+                smax= nums[i];
+            }
+        }
+        cout<<maxi<<" "<<smax<<" ";
+        return (maxi-1)*(smax-1);
     }
 };
